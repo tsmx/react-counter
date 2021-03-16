@@ -9,7 +9,6 @@ class Counter extends React.Component {
     }
 
     componentDidMount() {
-        console.log("setup2");
         // no timer shorter than 50ms (not really visible any way)
         let minTimer = 50;
         // calc step time to show all interediate values
@@ -23,6 +22,12 @@ class Counter extends React.Component {
         this.countUp();
     }
 
+    componentWillUnmount() {
+        if(this.timer) {
+            clearInterval(this.timer);
+        }
+    }
+
     countUp() {
         let now = new Date().getTime();
         let remaining = Math.max((this.endTime - now) / this.props.durationMs, 0);
@@ -30,8 +35,8 @@ class Counter extends React.Component {
         this.setState({ currentValue: value });
         if (value === this.props.countTo) {
             clearInterval(this.timer);
+            this.timer = null;
         }
-        console.log("step2");
     }
 
 

@@ -8,7 +8,6 @@ const CounterFunc = (props) => {
 
 
     useEffect(() => {
-        console.log("setup");
         var range = effectProps.current.countTo - effectProps.current.countFrom;
         // no timer shorter than 50ms (not really visible any way)
         let minTimer = 50;
@@ -20,15 +19,20 @@ const CounterFunc = (props) => {
         let startTime = new Date().getTime();
         var endTime = startTime + effectProps.current.durationMs;
         timer.current = setInterval(() => {
-            console.log("step");
             let now = new Date().getTime();
             let remaining = Math.max((endTime - now) / effectProps.current.durationMs, 0);
             let value = Math.round(effectProps.current.countTo - (remaining * range));
             setCounter(value);
-            if (value=== effectProps.current.countTo) {
+            if (value === effectProps.current.countTo) {
                 clearInterval(timer.current);
+                timer.current = null;
             }
         }, stepTime);
+        return () => {
+            if (timer.current) {
+                clearInterval(timer.current);
+            }
+        };
     }, []);
 
     return (
