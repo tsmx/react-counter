@@ -1,20 +1,16 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from 'react';
 
 const CounterFunc = (props) => {
 
     const [counter, setCounter] = useState(props.countFrom);
     const timer = useRef(null);
     const effectProps = useRef(props);
-
+    const minTimer = 50;
 
     useEffect(() => {
         var range = effectProps.current.countTo - effectProps.current.countFrom;
-        // no timer shorter than 50ms (not really visible any way)
-        let minTimer = 50;
-        // calc step time to show all interediate values
-        let stepTime = Math.abs(Math.floor(effectProps.current.durationMs / range));
-        // never go below minTimer
-        stepTime = Math.max(stepTime, minTimer);
+        // calc step time to show all intermediate values, never go below minTimer
+        let stepTime = Math.max(Math.abs(Math.floor(effectProps.current.durationMs / range)), minTimer);
         // get current time and calculate desired end time
         let startTime = new Date().getTime();
         var endTime = startTime + effectProps.current.durationMs;
@@ -28,6 +24,7 @@ const CounterFunc = (props) => {
                 timer.current = null;
             }
         }, stepTime);
+        // clean-up in case component unmounts before counting-up is done
         return () => {
             if (timer.current) {
                 clearInterval(timer.current);

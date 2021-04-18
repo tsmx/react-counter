@@ -23,7 +23,7 @@ class Counter extends React.Component {
     }
 
     componentWillUnmount() {
-        if(this.timer) {
+        if (this.timer) {
             clearInterval(this.timer);
         }
     }
