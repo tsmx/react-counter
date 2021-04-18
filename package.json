@@ -1,7 +1,19 @@
 {
-  "name": "react-test",
+  "name": "react-counter",
+  "description": "Simple React component for animated counting up, e.g. to use in dashboards. Demonstrating class-based and functional component implementation.",
   "version": "0.1.0",
-  "private": true,
+  "author": "tsmx <dev@tsmx.net>",
+  "license": "MIT",
+  "keywords": [
+      "React",
+      "component",
+      "class-based",
+      "functional",
+      "counter",
+      "animation",
+      "dashboard",
+      "hooks"
+  ],
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
