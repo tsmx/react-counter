@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Counter from './Counter';
-import CounterFunc from './CounterFunc';
+import Counter from './components/Counter';
+import CounterFunc from './components/CounterFunc';
 
 const App = () => {
     return (
