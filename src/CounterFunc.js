@@ -11,10 +11,12 @@ const CounterFunc = (props) => {
         // calc step time to show all intermediate values, never go below minTimer
         const stepTime = Math.max(Math.abs(Math.floor(propsRef.current.durationMs / range)), minTimer);
         // get current time and calculate desired end time
-        const endTime = new Date().getTime() + propsRef.current.durationMs;
+        const startTime = new Date().getTime();
+        const endTime = startTime + propsRef.current.durationMs;
         var timer = setInterval(() => {
-            let remaining = Math.max((endTime - new Date().getTime()) / propsRef.current.durationMs, 0);
-            let value = Math.round(propsRef.current.countTo - (remaining * range));
+            const now = new Date().getTime();
+            const remaining = Math.max((endTime - now) / propsRef.current.durationMs, 0);
+            const value = Math.round(propsRef.current.countTo - (remaining * range));
             setCounter(value);
             if (value === propsRef.current.countTo) {
                 clearInterval(timer);

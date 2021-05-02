@@ -10,13 +10,13 @@ class Counter extends React.Component {
 
     componentDidMount() {
         // no timer shorter than 50ms (not really visible any way)
-        let minTimer = 50;
+        const minTimer = 50;
         // calc step time to show all interediate values
         let stepTime = Math.abs(Math.floor(this.props.durationMs / this.range));
         // never go below minTimer
         stepTime = Math.max(stepTime, minTimer);
         // get current time and calculate desired end time
-        let startTime = new Date().getTime();
+        const startTime = new Date().getTime();
         this.endTime = startTime + this.props.durationMs;
         this.timer = setInterval(() => { this.countUp(); }, stepTime);
         this.countUp();
@@ -29,9 +29,9 @@ class Counter extends React.Component {
     }
 
     countUp() {
-        let now = new Date().getTime();
-        let remaining = Math.max((this.endTime - now) / this.props.durationMs, 0);
-        let value = Math.round(this.props.countTo - (remaining * this.range));
+        const now = new Date().getTime();
+        const remaining = Math.max((this.endTime - now) / this.props.durationMs, 0);
+        const value = Math.round(this.props.countTo - (remaining * this.range));
         this.setState({ currentValue: value });
         if (value === this.props.countTo) {
             clearInterval(this.timer);
