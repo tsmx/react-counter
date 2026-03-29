@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const CounterFunc = (props) => {
+const CounterFunc = ({ countFrom, countTo, durationMs = 400 }) => {
 
-  const [counter, setCounter] = useState(props.countFrom);
-  const propsRef = useRef(props);
+  const [counter, setCounter] = useState(countFrom);
+  const propsRef = useRef({ countFrom, countTo, durationMs });
   const minTimer = 50;
 
   useEffect(() => {
@@ -13,7 +13,7 @@ const CounterFunc = (props) => {
     // get current time and calculate desired end time
     const startTime = new Date().getTime();
     const endTime = startTime + propsRef.current.durationMs;
-    var timer = setInterval(() => {
+    let timer = setInterval(() => {
       const now = new Date().getTime();
       const remaining = Math.max((endTime - now) / propsRef.current.durationMs, 0);
       const value = Math.round(propsRef.current.countTo - (remaining * range));
@@ -34,10 +34,6 @@ const CounterFunc = (props) => {
   return (
     <span>{counter}</span>
   );
-}
-
-CounterFunc.defaultProps = {
-  durationMs: 400
 }
 
 export default CounterFunc;

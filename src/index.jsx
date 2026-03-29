@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 import Counter from './components/Counter';
 import CounterFunc from './components/CounterFunc';
@@ -14,7 +14,4 @@ const App = () => {
     );
 }
 
-ReactDOM.render(
-    <App />,
-    document.getElementById('root')
-);
+createRoot(document.getElementById('root')).render(<App />);
